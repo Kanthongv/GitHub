@@ -19,10 +19,12 @@ public class MeliFilter {
 	public synchronized void filter(String serverName, final String ip) throws Exception {
 		//Works with the cache, must be saved to cache
 //		System.out.println("IP: " + ip);
+		
+		
 		Long current = cache.incr(MeliConfig.SERVER_CURRENT_REQUESTS_COUNTER, 1, 1);
 		System.out.println("Count: " + current);
 		
-		if (current > 50000) {
+		if (current > MeliConfig.MAX_REQUESTS) {
 			throw new Exception("Limit reached");
 		}
 	}

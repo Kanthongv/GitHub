@@ -18,10 +18,11 @@ public class ConfigRest {
 
 	@GET
 	@Produces("application/json")
-	public String getClichedMessage() {
+	public String getConfigDetails() {
 		JSONObject jsonResponse = new JSONObject();
-		jsonResponse.put(MeliConfig.CONFIG_CACHE_TIMEOUT,
-				CacheManager.getTimeout());
+		jsonResponse.put(MeliConfig.CONFIG_CACHE_TIMEOUT, CacheManager.getTimeout());
+		
+		//Add threads pool
 
 		return jsonResponse.toString();
 	}
@@ -30,17 +31,19 @@ public class ConfigRest {
 	@Produces("application/json")
 	public void updateDefaultCacheTimeout(String json) {
 		JSONObject jsonResponse = new JSONObject(json);
-		System.out.println(jsonResponse.toString());
+		
+		logger.info(jsonResponse.toString());
 
+		//Cache timeout
 		int timeout = jsonResponse.getInt(MeliConfig.CONFIG_CACHE_TIMEOUT);
-		System.out.println(MeliConfig.CONFIG_CACHE_TIMEOUT + timeout);
+		logger.info(MeliConfig.CONFIG_CACHE_TIMEOUT + ": " + timeout);
 		
 		ConfigManager.setTimeout(timeout);
 
 		// Flush
 		boolean flushCache = jsonResponse.getBoolean(MeliConfig.CONFIG_FLUSH_CACHE);
 
-		System.out.println("flush-cache: " + flushCache);
+		logger.info("Flush-cache: " + flushCache);
 		if (flushCache) {
 			ConfigManager.flushCache();
 		}

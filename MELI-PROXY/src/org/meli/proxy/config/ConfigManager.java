@@ -6,7 +6,7 @@ import org.meli.proxy.cache.MeliCache;
 
 public class ConfigManager {
 
-	public static String SERVER_NAME = null;
+	public static String SERVER_NAME = "Server-1";
 	
 	public static void setTimeout(int timeout) {
 		CacheManager.setTimeout(timeout);
@@ -23,4 +23,5 @@ public class ConfigManager {
         System.out.println("Request counter reset");
         MeliCache.set(MeliConfig.SERVER_CURRENT_REQUESTS_COUNTER, 3600, "0");
 	}
+	
 }

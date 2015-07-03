@@ -7,10 +7,10 @@ public interface MeliConfig {
 	
 	String WEB_CONTEXT = "/MELI-PROXY/";
 	
-	//String WEB_CONTEXT = "/MELI-PROXY/";
-	
 	//TTL for objects in the cache.
-	int DEFAULT_CACHE_TIMEOUT = 10;
+	int DEFAULT_CACHE_TIMEOUT = 30;
+	
+	long MAX_REQUESTS = 500;
 	
 	String CACHE_IP = "127.0.0.1";
 	Integer CACHE_PORT =  11211;
