@@ -52,7 +52,7 @@ public class ProxyServlet extends HttpServlet {
 
 		// Filter
 		try {
-			filter.filter(request.getServerName(), request.getRemoteAddr());
+			filter.filter(request);
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 
@@ -74,7 +74,7 @@ public class ProxyServlet extends HttpServlet {
 		try {
 			// Filter
 			try {
-				filter.filter(request.getServerName(), request.getRemoteAddr());
+				filter.filter(request);
 				//throw new Exception("My exc");
 			} catch (Exception e) {
 				response.sendError(HttpServletResponse.SC_FORBIDDEN);
@@ -111,7 +111,7 @@ public class ProxyServlet extends HttpServlet {
 
 		// Filter
 		try {
-			filter.filter(request.getServerName(), request.getRemoteAddr());
+			filter.filter(request);
 		} catch (Exception e) {
 			response.sendError(HttpServletResponse.SC_FORBIDDEN);
 

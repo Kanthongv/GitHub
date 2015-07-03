@@ -2,11 +2,19 @@ package org.meli.proxy.filter;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.meli.proxy.MeliConfig;
 import org.meli.proxy.cache.MeliCache;
 
 import net.spy.memcached.MemcachedClient;
 
+/**
+ * Filter for all instances requests.
+ * 
+ * @author kvannasaeng
+ *
+ */
 public class MeliFilter {
 	private MemcachedClient cache;
 	
@@ -16,11 +24,12 @@ public class MeliFilter {
 		this.cache = MeliCache.getClient();
 	}
 	
-	public synchronized void filter(String serverName, final String ip) throws Exception {
-		//Works with the cache, must be saved to cache
-//		System.out.println("IP: " + ip);
-		
-		
+	/**
+	 * Filter request
+	 * @throws Exception
+	 */
+	//TODO: Filter by ip, path, etc
+	public synchronized void filter(HttpServletRequest servletRequest) throws Exception {
 		Long current = cache.incr(MeliConfig.SERVER_CURRENT_REQUESTS_COUNTER, 1, 1);
 		System.out.println("Count: " + current);
 		

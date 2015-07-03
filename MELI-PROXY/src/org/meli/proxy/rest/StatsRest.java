@@ -16,9 +16,12 @@ import org.meli.proxy.cache.MeliCache;
 import org.meli.proxy.cache.MeliThread;
 import org.meli.proxy.config.ConfigManager;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-
+/**
+ * Rest service for stats data.
+ * 
+ * @author kvannasaeng
+ *
+ */
 @Path("/stats")
 public class StatsRest {
 	
@@ -34,16 +37,16 @@ public class StatsRest {
 
 		jsonEntry.put(ConfigManager.SERVER_NAME, jsonArray);
 		
-		jsonResponse.putOnce("Description", "Meli Proxy Stats");
+		//jsonResponse.putOnce("Description", "Meli Proxy Stats");
 		jsonResponse.putOnce(MeliConfig.CONFIG_CACHE_TIMEOUT, CacheManager.getTimeout());
-		jsonResponse.putOnce("SERVER_MAX_REQUESTS", MeliConfig.MAX_REQUESTS);
+		jsonResponse.putOnce("proxy-max-requests", MeliConfig.MAX_REQUESTS);
 
 		// Add threads pool
 		HashMap<String, MeliThread> conn = CacheManager.getMeliConnectors();
 		
 		JSONObject jsonThread = new JSONObject();
 		
-		for (Iterator it = conn.entrySet().iterator(); it.hasNext();) {
+		for (Iterator<Entry<String, MeliThread>> it = conn.entrySet().iterator(); it.hasNext();) {
 			Entry<String, MeliThread> type = (Entry<String, MeliThread>) it.next();
 			
 			String name = type.getValue().getName();
